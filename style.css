@@ -126,10 +126,16 @@ label {
   position: fixed;
   inset: 0;
   background-color: rgba(255, 255, 255, 0.8);
-  display: none;
+  display: block;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+}
+.popup.hidden,
+.overlay.hidden,
+.btn-done.hidden {
   opacity: 0;
+  display: none;
 }
 
 .popup {
@@ -137,13 +143,13 @@ label {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
+  opacity: 1;
+  display: flex;
   background-color: #212529;
   border-radius: 5px;
   padding: 3rem;
   aspect-ratio: 16/9;
   height: 50rem;
-  display: none;
   flex-direction: column;
   gap: 5rem;
   font-size: 1.8rem;
@@ -152,6 +158,7 @@ label {
 .popup input {
   font-size: 2.4rem;
   text-transform: uppercase;
+  width: 70%;
 }
 .popup input:disabled,
 .popup textarea:disabled {
@@ -159,14 +166,12 @@ label {
   color: #f8f9fa;
 }
 
-.popup.editEl .btn-done {
+.btn-done {
   align-self: center;
   display: block;
+  opacity: 1;
 }
-.popup .btn-done {
-  align-self: center;
-  display: none;
-}
+
 .buttons-popup {
   position: absolute;
   top: 2rem;

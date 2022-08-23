@@ -1,12 +1,18 @@
 const form = document.querySelector(".form");
 const btnAdd = document.querySelector(".btn-add");
 const btnView = document.querySelector(".btn-view");
+const btnClose = document.querySelector(".close");
+const btnEdit = document.querySelector(".edit");
+const btnDone = document.querySelector(".btn-done");
 const btnGenerateText = document.querySelector(".btn-generate");
 const inputTitle = document.getElementById("noteTitle");
 const inputText = document.getElementById("noteText");
 const main = document.querySelector(".main");
+const popupEl = document.querySelector(".popup");
+const overlayEl = document.querySelector(".overlay");
 let titlePopup = document.getElementById("popupTitle");
 let textPopup = document.getElementById("popupText");
+const btnPopup = document.querySelector(".buttons-popup");
 
 class Note {
   #note = {};
@@ -17,6 +23,10 @@ class Note {
     form.addEventListener("submit", this._createNote.bind(this));
     btnGenerateText.addEventListener("click", this._generateText.bind(this));
     main.addEventListener("click", this._showPopup.bind(this));
+    overlayEl.addEventListener("click", this._closePopup.bind(this));
+    popupEl.addEventListener("click", this._closePopup.bind(this));
+    btnEdit.addEventListener("click", this._editNote.bind(this));
+    btnDone.addEventListener("click", this._changeDataNote.bind(this));
   }
 
   _createNote(e) {
@@ -41,50 +51,83 @@ class Note {
         <p class="title">${data.title}</p>
         <p class="text">
           ${
-            data.text.length < 150
-              ? data.text
-              : data.text.slice(0, 250) + " ..."
+            data.text.length < 150 ? data.text : data.text.slice(0, 150) + "..."
           }
         </p>
         <div class="btn btn-view">View</div>
       </div>
     `;
-    main.insertAdjacentHTML("beforeend", html);
+    main.insertAdjacentHTML("afterbegin", html);
   }
 
   _showPopup(e) {
     e.preventDefault();
+    const open = e.target.closest(".btn-view");
+    if (!open) return;
+    const id = e.target.closest(".page").dataset["id"];
 
-    const btn = e.target.closest(".btn-view");
-    if (!btn) return;
-    const page = btn.closest(".page");
-    const id = page.dataset["id"];
-
-    const overlay = document.querySelector(".overlay");
-    const popup = document.querySelector(".popup");
-
-    [overlay, popup].forEach((el) => {
-      el.style.display = "flex";
-      el.style.opacity = "1";
+    [overlayEl, popupEl].forEach((el) => {
+      el.classList.remove("hidden");
     });
+    this._renderPopup(this.#note[id]);
+    this.#note["editedId"] = id;
+  }
+  _closePopup(e) {
+    const overlay = e.target.closest(".overlay");
+    const close = e.target.closest(".close");
+    if (overlay || close) {
+      [overlayEl, popupEl].forEach((el) => {
+        el.classList.add("hidden");
+      });
+      this._closeEdit();
+      btnEdit.classList.remove("open");
+    }
+  }
+  _editNote(e) {
+    const id = this.#note["editedId"];
 
-    function closePopup() {
-      popup.style.display = "none";
-      popup.style.opacity = "0";
-      overlay.style.display = "none";
-      overlay.style.opacity = "0";
+    if (!e.target.closest(".open")) {
+      titlePopup.disabled = false;
+      textPopup.disabled = false;
+      btnDone.classList.remove("hidden");
+      btnEdit.classList.add("open");
+    } else {
+      btnEdit.classList.remove("open");
+      this._closeEdit();
+      titlePopup.value = this.#note[id].title;
+      textPopup.value = this.#note[id].text;
+    }
+  }
+  _closeEdit() {
+    titlePopup.disabled = true;
+    textPopup.disabled = true;
+    btnDone.classList.add("hidden");
+  }
+
+  _changeDataNote(e) {
+    e.preventDefault();
+    console.log(titlePopup.value);
+    const id = this.#note["editedId"];
+    delete this.#note[id];
+    this.#note[id] = {
+      id: +id,
+      title: titlePopup.value,
+      text: textPopup.value,
+    };
+
+    titlePopup.disabled = true;
+    textPopup.disabled = true;
+    btnDone.classList.add("hidden");
+    btnEdit.classList.remove("open");
+    for (const page of Object.values(main.children)) {
+      if (page.dataset["id"] === id) page.remove();
     }
 
-    overlay.addEventListener("click", () => {
-      closePopup();
-    });
-    popup.addEventListener("click", (e) => {
-      const close = e.target.closest(".close");
-      if (close) return closePopup();
-    });
-
-    this._renderPopup(this.#note[id]);
+    this._render(this.#note[id]);
+    delete this.#note["editedId"];
+    this._setLocalStorage();
   }
+
   _renderPopup(data) {
     titlePopup.value = data.title;
     textPopup.value = data.text;
@@ -96,12 +139,14 @@ class Note {
 
   _getLocalStorage() {
     this.#note = JSON.parse(localStorage.getItem("note"));
-    if (!this.#note || Object.keys(this.#note).length === 0)
+    if (!this.#note || Object.keys(this.#note).length === 0) {
       return (this.#note = {});
+    }
 
     this.#id = +Object.keys(this.#note).at(-1) + 1;
 
-    for (const el of Object.values(this.#note)) {
+    for (const [key, el] of Object.entries(this.#note)) {
+      if (key === "editedId") return;
       this._render(el);
     }
   }
