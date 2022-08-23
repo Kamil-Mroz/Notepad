@@ -15,6 +15,7 @@ class Note {
     this._getLocalStorage();
 
     form.addEventListener("submit", this._createNote.bind(this));
+    btnGenerateText.addEventListener("click", this._generateText.bind(this));
   }
 
   _createNote(e) {
@@ -64,6 +65,25 @@ class Note {
     for (const el of Object.values(this.#note)) {
       this._render(el);
     }
+  }
+
+  _generateText() {
+    let text = "";
+    const words = Math.floor(Math.random() * 50) + 150;
+    for (let i = 0; i < words; i++) {
+      text += ` ${this._makeWork(Math.floor(Math.random() * 7))}`;
+    }
+    inputText.value = text;
+  }
+
+  _makeWork(letters) {
+    let result = "";
+    const characters = "abcdefghijklmnopqrstuvwxyz";
+    const charactersLength = characters.length;
+    for (let i = 0; i < letters; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   }
 }
 
