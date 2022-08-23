@@ -1,0 +1,189 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  min-height: 100vh;
+  font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #f8f9fa;
+  background-color: #212529;
+  position: relative;
+}
+.header {
+  max-width: 130rem;
+  margin-inline: auto;
+  padding: 3rem;
+
+  text-align: center;
+}
+.heading-1 {
+  margin-bottom: 2.4rem;
+  text-transform: uppercase;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.btn,
+.form input,
+.form textarea,
+.popup input,
+.popup textarea {
+  border-radius: 5px;
+  border: none;
+  padding: 1rem 2rem;
+  color: #212529;
+  font-weight: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+.btn {
+  color: #f8f9fa;
+
+  cursor: pointer;
+}
+.buttons {
+  display: flex;
+  gap: 2rem;
+}
+.form textarea {
+  width: 60%;
+}
+
+.form input {
+  text-align: center;
+  width: 40%;
+}
+
+label {
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+#noteText,
+.popup textarea {
+  resize: none;
+}
+
+.btn-add,
+.btn-done {
+  background-color: #51cf66;
+}
+.main {
+  display: grid;
+  padding: 3rem;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 4rem;
+}
+.page {
+  width: 30rem;
+  height: 30rem;
+  padding: 2rem;
+  background-color: #343a40;
+  border-radius: 5px;
+  width: 100%;
+  position: relative;
+}
+.title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.text {
+  width: 100%;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.btn-view,
+.btn-generate {
+  background-color: #4c6ef5;
+  display: inline-block;
+  margin-inline: auto;
+}
+.btn-view {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  background-color: #212529;
+  border-radius: 5px;
+  padding: 3rem;
+  aspect-ratio: 16/9;
+  height: 50rem;
+  display: none;
+  flex-direction: column;
+  gap: 5rem;
+  font-size: 1.8rem;
+  isolation: isolate;
+}
+.popup input {
+  font-size: 2.4rem;
+}
+.popup input:disabled,
+.popup textarea:disabled {
+  background-color: transparent;
+  color: #f8f9fa;
+}
+
+.popup.editEl .btn-done {
+  align-self: center;
+  display: block;
+}
+.popup .btn-done {
+  align-self: center;
+  display: none;
+}
+.buttons-popup {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  gap: 2rem;
+}
+.icon {
+  font-size: 3rem;
+  padding: 1.5rem;
+}
+
+/*
+--- 01 TYPOGRAPHY SYSTEM
+
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/

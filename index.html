@@ -5,6 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notepad</title>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="main.js"></script>
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <h1 class="heading-1">Notepad</h1>
+      <form action="#" class="form">
+        <label for="noteTitle">Title</label>
+        <input type="text" name="noteTitle" id="noteTitle" />
+        <label for="noteText">Text</label>
+        <textarea name="noteText" id="noteText" cols="30" rows="5"></textarea>
+        <div class="buttons">
+          <button class="btn btn-add">Add note</button>
+          <div class="btn btn-generate">Generate text</div>
+        </div>
+      </form>
+    </header>
+    <main class="main">
+      <div class="page">
+        <p class="title">Title 1</p>
+        <p class="text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque id
+          eaque veniam quos facere nemo ad eligendi, iste expedita aliquam
+        </p>
+        <div class="btn btn-view">View</div>
+      </div>
+    </main>
+    <div class="overlay"></div>
+    <form action="#" class="popup">
+      <input type="text" id="popupTitle" value="" disabled />
+      <textarea
+        name="popupText"
+        id="popupText"
+        cols="30"
+        rows="10"
+        disabled
+      ></textarea>
+      <button class="btn btn-done">Done</button>
+      <div class="buttons-popup">
+        <span class="edit">
+          <ion-icon name="create-outline" class="icon"></ion-icon
+        ></span>
+        <span class="close">
+          <ion-icon name="close-outline" class="icon"></ion-icon>
+        </span>
+      </div>
+    </form>
+  </body>
 </html>
