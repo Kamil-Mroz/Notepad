@@ -2,8 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Notepad</title>
     <script
       type="module"
@@ -13,33 +19,69 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
-    <script defer src="main.js"></script>
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+    <script
+      defer
+      src="main.js"
+    ></script>
   </head>
   <body>
     <header class="header">
       <h1 class="heading-1">Notepad</h1>
-      <form action="#" class="form">
+      <form
+        action="#"
+        class="form"
+      >
         <label for="noteTitle">Title</label>
-        <input type="text" name="noteTitle" id="noteTitle" />
+        <input
+          type="text"
+          name="noteTitle"
+          id="noteTitle"
+          maxlength="30"
+        />
         <label for="noteText">Text</label>
-        <textarea name="noteText" id="noteText" cols="30" rows="5"></textarea>
+        <textarea
+          name="noteText"
+          id="noteText"
+          cols="30"
+          rows="5"
+        ></textarea>
         <div class="buttons">
           <button class="btn btn-add">Add note</button>
           <div class="btn btn-generate">Generate text</div>
+          <div class="btn btn-delete">Delete all</div>
         </div>
       </form>
     </header>
     <main class="main"></main>
     <div class="overlay hidden"></div>
-    <form action="#" class="popup hidden">
-      <input type="text" id="popupTitle" value="" disabled />
+    <form
+      action="#"
+      class="popup hidden"
+    >
+      <input
+        type="text"
+        id="popupTitle"
+        maxlength="30"
+        value=""
+        disabled
+      />
       <textarea
         name="popupText"
         id="popupText"
@@ -50,10 +92,16 @@
       <button class="btn btn-done hidden">Done</button>
       <div class="buttons-popup">
         <span class="edit">
-          <ion-icon name="create-outline" class="icon"></ion-icon
+          <ion-icon
+            name="create-outline"
+            class="icon"
+          ></ion-icon
         ></span>
         <span class="close">
-          <ion-icon name="close-outline" class="icon"></ion-icon>
+          <ion-icon
+            name="close-outline"
+            class="icon"
+          ></ion-icon>
         </span>
       </div>
     </form>
